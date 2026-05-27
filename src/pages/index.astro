@@ -1,17 +1,2035 @@
+﻿---
+const phone = "573209639322";
+const orderUrl = `https://wa.me/${phone}?text=${encodeURIComponent("Hola Paniko! Quiero hacer un pedido 🍗")}`;
+const address =
+  "Transversal 78D #10A-18 Villa Alsacia, Castilla, Kennedy, Bogotá, Colombia";
+const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+
+const featured = [
+  {
+    name: "CUBANIK",
+    kicker: "8 horas de cocción. 0 arrepentimiento.",
+    description:
+      "Cerdo de cocción lenta, mozzarella, costilla ahumada, jamón, pepinillos y mostaza.",
+    price: "$ 31.500",
+    image: "/images/cubanik.jpeg",
+  },
+  {
+    name: "PANIKO V-KA",
+    kicker: "Salsa vodka. Actitud Paniko.",
+    description: "Milanesa de pollo en salsa vodka con queso fundido y rúgula.",
+    price: "$ 24.900",
+    image: "/images/vka.jpeg",
+  },
+  {
+    name: "BONELESS",
+    kicker: "Crujientes. Adictivos. Únicos.",
+    description:
+      "200gr de boneless bañados en salsa de tu elección con papas francesas.",
+    price: "$ 26.900",
+    image: "/images/boneless.jpeg",
+  },
+];
+
+const menuGroups = [
+  {
+    category: "Sandwiches",
+    items: [
+      [
+        "PANIKO V-KA",
+        "Milanesa de pollo en salsa vodka con queso fundido y rúgula.",
+        "$ 24.900",
+      ],
+      [
+        "PANIKO MEATBALL",
+        "Tres albóndigas en salsa brutal, queso derretido y pan ciabatta.",
+        "$ 26.800",
+      ],
+      [
+        "CUBANIK",
+        "Cerdo de cocción lenta durante 8 horas, mozzarella, costilla ahumada, jamón, pepinillos y mostaza.",
+        "$ 31.500",
+      ],
+      [
+        "ROASTEEK",
+        "Roast beef caliente cortado finamente, cheddar cremoso, vegetales frescos y salsa de la casa.",
+        "$ 32.500",
+      ],
+      [
+        "PARRIK",
+        "Lomo fino a la parrilla, mayochimichurri, queso fundido y vegetales frescos.",
+        "$ 34.000",
+      ],
+    ],
+  },
+  {
+    category: "Más Paniko",
+    items: [
+      [
+        "BONELESS",
+        "Boneless crujientes con papas francesas y salsa a elección.",
+        "$ 26.900",
+      ],
+      [
+        "MEATBALL FRIES",
+        "Papas cargadas con albóndigas, salsa de la casa y queso fundido.",
+        "Consultar",
+      ],
+      [
+        "V-KA FRIES",
+        "Papas estilo Paniko con salsa vodka, pollo y queso.",
+        "Consultar",
+      ],
+      [
+        "TORONIKA / MARACUYANIK",
+        "Bebidas de la casa para cortar el picante y seguir comiendo.",
+        "Consultar",
+      ],
+    ],
+  },
+];
+
+const testimonials = [
+  [
+    "Laura Ovalle",
+    "Super deli, comimos bites de jalapeños de otro mundo. Los sándwiches super recomendados.",
+  ],
+  [
+    "Victor Duarte",
+    "Cumplió mis expectativas, muy rico, rápido y buena música.",
+  ],
+  ["Li- Hall Selecktah", "Qué ricos sandwiches!!"],
+  [
+    "Nathalia Lara",
+    "La comida deliciosa, el lugar súper agradable, y la atención excelente!!",
+  ],
+];
+
+const tickerWords = [
+  "CUBANIK",
+  "V-KA",
+  "MEATBALL",
+  "PARRIK",
+  "ROASTEEK",
+  "MEATBALL FRIES",
+  "V-KA FRIES",
+  "BONELESS",
+  "TORONIKA",
+  "MARACUYANIK",
+];
 ---
 
----
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Paniko Sandwich & Boneless en Bogotá: sandwiches urbanos, boneless, papas cargadas y domicilios por WhatsApp."
+    />
+    <link rel="icon" type="image/jpeg" href="/images/logo.jpeg" />
+    <title>Paniko | Sandwich & Boneless Bogotá</title>
+  </head>
+  <body>
+    <div class="loader" aria-live="polite" aria-label="Cargando Paniko">
+      <div class="loader-card">
+        <img src="/images/logo.jpeg" alt="Paniko" />
+        <p>Preparando el pedido</p>
+        <div class="loader-track"><span></span></div>
+        <small>CUBANIK · V-KA · BONELESS</small>
+      </div>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
+    <canvas id="panic-orb" aria-hidden="true"></canvas>
+    <div class="scroll-rail" aria-hidden="true"><span></span></div>
+    <div class="street-bg" aria-hidden="true">
+      <span class="spray spray-a parallax-layer"></span>
+      <span class="spray spray-b parallax-layer"></span>
+      <span class="street-line parallax-layer"></span>
+      <span class="panic-word parallax-layer">PANIKO</span>
+    </div>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+    <header class="site-header reveal-soft">
+      <a class="brand" href="#top" aria-label="Paniko inicio"
+        ><img src="/images/logo.jpeg" alt="Paniko Sandwich & Boneless" /></a
+      >
+      <div class="header-center">
+        <span>Villa Alsacia · Bogotá</span>
+        <nav aria-label="Navegación principal">
+          <a href="#destacados">Top</a><a href="#menu">Menú</a><a
+            href="#historia">Historia</a
+          ><a href="#ubicacion">Mapa</a>
+        </nav>
+      </div>
+      <a class="pill" href={orderUrl} target="_blank" rel="noopener noreferrer"
+        ><span>WhatsApp</span><b>320 963 9322</b></a
+      >
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="hero-copy">
+          <p class="eyebrow">Bogotá, Colombia · Sandwich & Boneless</p>
+          <h1 class="hero-title split-title">PANIKO</h1>
+          <p class="hero-subtitle">
+            Sabores que no encuentras en otro lado. Recetas originales. Actitud
+            Paniko.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-primary"
+              href={orderUrl}
+              target="_blank"
+              rel="noopener noreferrer">Pedir por WhatsApp</a
+            >
+            <a class="button button-ghost" href="#menu">Ver menú</a>
+          </div>
+        </div>
+        <div class="hero-card tilt-card">
+          <img src="/images/cubanik.jpeg" alt="Sandwich Cubanik de Paniko" />
+          <div class="hero-card-label">
+            <span>Delicioso</span><strong>CUBANIK</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="ticker" aria-label="Productos Paniko">
+        <div class="ticker-track">
+          {
+            [...tickerWords, ...tickerWords, ...tickerWords].map((word) => (
+              <span>{word}</span>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="ritual section-shell" aria-label="Cómo pedir en Paniko">
+        <div class="ritual-copy reveal-up">
+          <p class="eyebrow">Cómo pedir</p>
+          <h2>Arma tu antojo</h2>
+          <p>
+            Esta sección te guía para convertir el scroll en pedido: eliges
+            protagonista, salsa, combo y canal de domicilio.
+          </p>
+        </div>
+        <div class="ritual-steps">
+          <article class="ritual-card">
+            <span>01</span><h3>Elige el fuerte</h3><p>
+              Cubanik, V-KA, Meatball, Roast Beef, Parrik o boneless si vienes
+              por crunch.
+            </p>
+          </article>
+          <article class="ritual-card">
+            <span>02</span><h3>Sube la salsa</h3><p>
+              Vodka, casa, mostaza, pepinillos o la salsa que más combine con tu
+              antojo.
+            </p>
+          </article>
+          <article class="ritual-card">
+            <span>03</span><h3>Hazlo combo</h3><p>
+              Por $8.000 sumas papas francesas y limonada con refill o Coca Cola
+              mini.
+            </p>
+          </article>
+          <article class="ritual-card">
+            <span>04</span><h3>Pide directo</h3><p>
+              Toca “Pedir”, se abre WhatsApp con el producto y cerramos
+              domicilio sin vueltas.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-shell" id="destacados">
+        <div class="section-heading reveal-up">
+          <p class="eyebrow">Los que ponen la calle a hablar</p><h2>
+            PRODUCTOS ESPECIALES
+          </h2>
+        </div>
+        <div class="featured-grid">
+          {
+            featured.map((item, index) => (
+              <article
+                class="product-card reveal-up"
+                style={`--rotate:${index === 1 ? "1.5deg" : "-1.5deg"}`}
+              >
+                <img src={item.image} alt={item.name} loading="lazy" />
+                <>
+                  <p>{item.kicker}</p>
+                  <h3>{item.name}</h3>
+                  <span>{item.description}</span>
+                </>
+                <div>
+                  <>
+                    <strong>{item.price}</strong>
+                    <a
+                      href={`https://wa.me/${phone}?text=${encodeURIComponent(`Hola! Quiero pedir: ${item.name}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Pedir
+                    </a>
+                  </>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="menu-section section-shell" id="menu">
+        <div class="menu-intro reveal-up">
+          <div><p class="eyebrow">Nuestro menú</p><h2>El sabor habla</h2></div>
+          <aside>
+            <strong>Hazlo combo</strong><span
+              >Papas francesas + limonada de la casa con refill o Coca Cola mini
+              — todos los sandwiches</span
+            ><b>+$ 8.000</b>
+          </aside>
+        </div>
+        <div class="menu-board" data-menu-board>
+          {
+            menuGroups.map((group) => (
+              <section class="menu-column reveal-up">
+                <h3>{group.category}</h3>
+                {group.items.map(([name, description, price]) => (
+                  <article class="menu-item" data-menu-item>
+                    <div>
+                      <h4>{name}</h4>
+                      <p>{description}</p>
+                    </div>
+                    <div class="menu-price">
+                      <strong>{price}</strong>
+                      <a
+                        href={`https://wa.me/${phone}?text=${encodeURIComponent(`Hola! Quiero pedir: ${name}`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Pedir
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </section>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="story" id="historia">
+        <div class="story-image reveal-left">
+          <img
+            src="/images/cara.jpeg"
+            alt="Ilustración urbana de Paniko"
+            loading="lazy"
+          />
+        </div>
+        <div class="story-copy reveal-up">
+          <p class="eyebrow">Sobre Paniko</p><h2>Nacimos del pánico</h2>
+          <p>
+            Paniko nació de algo muy simple: el miedo a emprender. Después de
+            años guardando ideas, recetas y mezclas en un cuaderno, convertimos
+            esa obsesión por los sandwiches y el fast food americano en algo
+            real.
+          </p>
+          <p>
+            No buscamos hacer comida rápida aburrida: queremos que vengas, comas
+            rico, te sientas cómodo y tengas ganas de volver.
+          </p>
+          <div class="values">
+            <span>Salsas hechas en casa</span><span
+              >Sandwiches con personalidad</span
+            ><span>Identidad urbana</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials section-shell">
+        <div class="section-heading reveal-up">
+          <p class="eyebrow">La calle habla</p><h2>Testimonios</h2>
+        </div>
+        <div class="quote-grid">
+          {
+            testimonials.map(([name, quote]) => (
+              <figure class="quote-card reveal-up">
+                <>
+                  <blockquote>“{quote}”</blockquote>
+                  <figcaption>{name}</figcaption>
+                </>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="order-section">
+        <img
+          src="/images/domicilio.jpeg"
+          alt="Pedido Paniko para domicilio"
+          loading="lazy"
+        />
+        <div class="order-copy reveal-up">
+          <p class="eyebrow">¿Qué esperas?</p><h2>Pide ahora</h2><p>
+            Escríbenos por WhatsApp y te armamos tu pedido. Rápido, directo, sin
+            vueltas.
+          </p><div class="hero-actions">
+            <a
+              class="button button-primary"
+              href={orderUrl}
+              target="_blank"
+              rel="noopener noreferrer">Pedir por WhatsApp</a
+            ><a
+              class="button button-ghost"
+              href="https://www.rappi.com.co"
+              target="_blank"
+              rel="noopener noreferrer">Rappi</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="location section-shell" id="ubicacion">
+        <div class="section-heading reveal-up">
+          <p class="eyebrow">Encuéntranos</p><h2>Ubicación</h2>
+        </div>
+        <div class="location-grid">
+          <article class="reveal-up">
+            <h3>Dirección</h3><p>{address}</p>
+          </article>
+          <article class="reveal-up">
+            <h3>Horarios</h3><p>
+              Mar a Jue: 2PM - 9PM · Vie y Sáb: 2PM - 10:30PM · Festivos: 2PM -
+              8PM · Lunes: Cerrado
+            </p>
+          </article>
+          <article class="reveal-up">
+            <h3>Contacto</h3><p>
+              WhatsApp: 320 963 9322 · Instagram: @panikofood · TikTok:
+              @panikosyb
+            </p>
+          </article>
+        </div>
+        <div class="map-stage reveal-up">
+          <div class="map-copy">
+            <p class="eyebrow">Villa Alsacia / Kennedy</p>
+            <h3>Caiga con hambre. Nosotros ponemos el pánico.</h3>
+            <p>
+              Abre el mapa, calcula tu ruta o pide domicilio directo por
+              WhatsApp. La sede queda en una zona fácil de ubicar para recogida
+              y domicilios cercanos.
+            </p>
+            <div class="map-actions">
+              <a
+                class="button button-primary"
+                href={directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer">Cómo llegar</a
+              >
+              <a
+                class="button button-ghost"
+                href={orderUrl}
+                target="_blank"
+                rel="noopener noreferrer">Pedir domicilio</a
+              >
+            </div>
+          </div>
+          <div class="map-frame" data-map-parallax>
+            <iframe
+              title="Mapa de Paniko en Villa Alsacia Bogotá"
+              src={mapUrl}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <span class="map-pin" aria-hidden="true">PANIKO</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <img src="/images/logo.jpeg" alt="Paniko" />
+      <p>Sabores que no encuentras en otro lado. Bogotá, Colombia.</p>
+      <div>
+        <a
+          href="https://instagram.com/panikofood"
+          target="_blank"
+          rel="noopener noreferrer">Instagram</a
+        ><a
+          href="https://tiktok.com/@panikosyb"
+          target="_blank"
+          rel="noopener noreferrer">TikTok</a
+        ><a href={orderUrl} target="_blank" rel="noopener noreferrer"
+          >WhatsApp</a
+        >
+      </div>
+      <small
+        >© 2026 Paniko Sandwich & Boneless · Hecho con sabor en Bogotá</small
+      >
+    </footer>
+
+    <script>
+      import gsap from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      function initMotion() {
+        if (reduceMotion) {
+          gsap.set(".loader", { autoAlpha: 0, display: "none" });
+          gsap.set(".reveal-up, .reveal-left, .reveal-soft, .ritual-card", {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+          });
+          return;
+        }
+
+        gsap.defaults({ ease: "power3.out", duration: 0.9 });
+        gsap.set(
+          ".site-header, .split-title, .hero-subtitle, .hero-actions, .hero-card",
+          { autoAlpha: 0 },
+        );
+        const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+        intro
+          .from(".loader-card", {
+            y: 40,
+            scale: 0.92,
+            autoAlpha: 0,
+            duration: 0.55,
+          })
+          .to(
+            ".loader-track span",
+            {
+              scaleX: 1,
+              transformOrigin: "left center",
+              duration: 0.75,
+              ease: "power2.inOut",
+            },
+            "<0.1",
+          )
+          .to(
+            ".loader-card img",
+            { rotate: -4, scale: 1.04, yoyo: true, repeat: 1, duration: 0.22 },
+            "<0.28",
+          )
+          .to(".loader", {
+            yPercent: -100,
+            autoAlpha: 0,
+            duration: 0.8,
+            ease: "expo.inOut",
+          })
+          .set(".loader", { display: "none" })
+          .fromTo(
+            ".site-header",
+            { autoAlpha: 0, y: -24 },
+            { autoAlpha: 1, y: 0, duration: 0.55 },
+            "-=0.15",
+          )
+          .fromTo(
+            ".split-title",
+            { autoAlpha: 0, yPercent: 18, scale: 0.94 },
+            { autoAlpha: 1, yPercent: 0, scale: 1, duration: 0.85 },
+            "<0.05",
+          )
+          .fromTo(
+            ".hero-subtitle, .hero-actions",
+            { autoAlpha: 0, y: 34 },
+            { autoAlpha: 1, y: 0, stagger: 0.12, duration: 0.65 },
+            "<0.18",
+          )
+          .fromTo(
+            ".hero-card",
+            { autoAlpha: 0, y: 80, rotation: 8, scale: 0.92 },
+            { autoAlpha: 1, y: 0, rotation: 3, scale: 1, duration: 0.9 },
+            "<0.05",
+          );
+        gsap.to(".scroll-rail span", {
+          scaleY: 1,
+          transformOrigin: "top center",
+          ease: "none",
+          scrollTrigger: {
+            trigger: document.body,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.5,
+          },
+        });
+        gsap.to(".ticker-track", {
+          xPercent: -16,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".ticker",
+            start: "top 92%",
+            end: "bottom 8%",
+            scrub: 3,
+          },
+        });
+
+        gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((element) => {
+          gsap.from(element, {
+            autoAlpha: 0,
+            y: 54,
+            scrollTrigger: {
+              trigger: element,
+              start: "top 84%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+        gsap.utils.toArray<HTMLElement>(".reveal-left").forEach((element) => {
+          gsap.from(element, {
+            autoAlpha: 0,
+            x: -70,
+            rotate: -5,
+            scrollTrigger: {
+              trigger: element,
+              start: "top 82%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+        gsap.to(".tilt-card", {
+          yPercent: -10,
+          rotate: -1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        const ritualCards = gsap.utils.toArray<HTMLElement>(".ritual-card");
+        gsap.set(ritualCards, { autoAlpha: 0.28, y: 60, scale: 0.92 });
+        const ritualTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".ritual",
+            start: "top top",
+            end: "+=1600",
+            scrub: 1,
+            pin: true,
+          },
+        });
+        ritualTimeline
+          .from(".ritual-copy h2", {
+            xPercent: -12,
+            autoAlpha: 0,
+            duration: 0.7,
+          })
+          .to(
+            ritualCards,
+            { autoAlpha: 1, y: 0, scale: 1, stagger: 0.26, duration: 0.9 },
+            "<0.15",
+          )
+          .to(
+            ritualCards,
+            {
+              xPercent: (index) => (index % 2 === 0 ? -8 : 8),
+              rotation: (index) => (index % 2 === 0 ? -2 : 2),
+              stagger: 0.18,
+              duration: 0.8,
+            },
+            "<0.35",
+          )
+          .to(".ritual", { "--ritual-glow": 1, duration: 0.6 }, "<");
+        gsap.to(".featured-grid", {
+          xPercent: -6,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#destacados",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        const menuItems = gsap.utils.toArray<HTMLElement>("[data-menu-item]");
+        gsap.set(".menu-column", { transformOrigin: "50% 0%" });
+        const menuTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#menu",
+            start: "top 72%",
+            end: "bottom 42%",
+            toggleActions: "play none none none",
+          },
+        });
+        menuTimeline
+          .from(".menu-intro h2", {
+            yPercent: 12,
+            scale: 0.98,
+            duration: 0.55,
+          })
+          .from(
+            ".menu-intro aside",
+            { x: 34, rotate: 1.4, duration: 0.5 },
+            "<0.1",
+          )
+          .from(
+            ".menu-column",
+            { y: 44, rotateX: 7, stagger: 0.14, duration: 0.62 },
+            "<0.12",
+          )
+          .from(
+            menuItems,
+            { x: -18, rotateX: -8, stagger: 0.045, duration: 0.36 },
+            "-=0.35",
+          );
+        gsap.to(".menu-column:first-child", {
+          yPercent: -4,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#menu",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.to(".menu-column:last-child", {
+          yPercent: 5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#menu",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.to(".story-image img", {
+          scale: 1.12,
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".story",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.to(".order-section img", {
+          scale: 1.1,
+          xPercent: -4,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".order-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.utils
+          .toArray<HTMLElement>(".parallax-layer")
+          .forEach((element, index) => {
+            gsap.to(element, {
+              yPercent: index % 2 === 0 ? -18 : 14,
+              xPercent: index === 3 ? -8 : 0,
+              rotate: index === 2 ? 5 : undefined,
+              ease: "none",
+              scrollTrigger: {
+                trigger: document.body,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.4,
+              },
+            });
+          });
+        gsap.utils
+          .toArray<HTMLElement>(
+            ".product-card, .quote-card, .location article, .menu-item",
+          )
+          .forEach((element) => {
+            element.addEventListener("pointermove", (event) => {
+              const bounds = element.getBoundingClientRect();
+              const relX = (event.clientX - bounds.left) / bounds.width - 0.5;
+              const relY = (event.clientY - bounds.top) / bounds.height - 0.5;
+              gsap.to(element, {
+                x: relX * 10,
+                y: relY * 8,
+                rotate: relX * 1.8,
+                duration: 0.28,
+                overwrite: "auto",
+              });
+            });
+            element.addEventListener("pointerleave", () =>
+              gsap.to(element, {
+                x: 0,
+                y: 0,
+                rotate: 0,
+                duration: 0.45,
+                overwrite: "auto",
+              }),
+            );
+          });
+        gsap.from(".map-frame", {
+          clipPath: "inset(18% 12% round 34px)",
+          scale: 0.94,
+          scrollTrigger: {
+            trigger: ".map-stage",
+            start: "top 78%",
+            end: "center center",
+            scrub: 0.8,
+          },
+        });
+        gsap.to("[data-map-parallax]", {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".location",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        ScrollTrigger.refresh();
+      }
+
+      async function initThree() {
+        const canvas = document.querySelector<HTMLCanvasElement>("#panic-orb");
+        if (!canvas || reduceMotion) return;
+        const activeCanvas = canvas;
+        const THREE = await import("three");
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+        camera.position.z = 5;
+        const renderer = new THREE.WebGLRenderer({
+          canvas: activeCanvas,
+          alpha: true,
+          antialias: true,
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+        const group = new THREE.Group();
+        scene.add(group);
+        const geometry = new THREE.TorusKnotGeometry(1.08, 0.32, 180, 18);
+        const material = new THREE.MeshStandardMaterial({
+          color: "#8b00c7",
+          roughness: 0.31,
+          metalness: 0.18,
+          emissive: "#250036",
+          emissiveIntensity: 0.6,
+        });
+        const knot = new THREE.Mesh(geometry, material);
+        group.add(knot);
+        const dropGeometry = new THREE.SphereGeometry(0.085, 18, 18);
+        const dropMaterials = ["#c8ff00", "#ff5b1a", "#fff8ee"].map(
+          (color) =>
+            new THREE.MeshStandardMaterial({
+              color,
+              roughness: 0.4,
+              emissive: color,
+              emissiveIntensity: 0.28,
+            }),
+        );
+        const drops = Array.from({ length: 26 }, (_, index) => {
+          const drop = new THREE.Mesh(
+            dropGeometry,
+            dropMaterials[index % dropMaterials.length],
+          );
+          const angle = (index / 26) * Math.PI * 2;
+          const radius = 1.72 + (index % 5) * 0.11;
+          drop.position.set(
+            Math.cos(angle) * radius,
+            Math.sin(angle * 1.7) * 0.42,
+            Math.sin(angle) * radius,
+          );
+          drop.userData = {
+            angle,
+            radius,
+            speed: 0.24 + (index % 6) * 0.025,
+            lift: 0.28 + (index % 4) * 0.08,
+          };
+          group.add(drop);
+          return drop;
+        });
+        scene.add(new THREE.AmbientLight("#fff8ee", 1.4));
+        const light = new THREE.PointLight("#c8ff00", 22, 9);
+        light.position.set(2.5, 2, 3);
+        scene.add(light);
+        const startedAt = performance.now();
+        function resize() {
+          const width = activeCanvas.clientWidth || 520;
+          const height = activeCanvas.clientHeight || 520;
+          renderer.setSize(width, height, false);
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+        }
+        function animate() {
+          const elapsed = (performance.now() - startedAt) / 1000;
+          knot.rotation.x = elapsed * 0.22;
+          knot.rotation.y = elapsed * 0.34;
+          group.rotation.z = Math.sin(elapsed * 0.23) * 0.16;
+          drops.forEach((drop) => {
+            const data = drop.userData as {
+              angle: number;
+              radius: number;
+              speed: number;
+              lift: number;
+            };
+            const angle = data.angle + elapsed * data.speed;
+            drop.position.x = Math.cos(angle) * data.radius;
+            drop.position.z = Math.sin(angle) * data.radius;
+            drop.position.y = Math.sin(angle * 2.1 + elapsed) * data.lift;
+            drop.scale.setScalar(
+              0.75 + Math.sin(elapsed * 2 + data.angle) * 0.18,
+            );
+          });
+          material.emissiveIntensity = 0.46 + Math.sin(elapsed * 1.7) * 0.16;
+          renderer.render(scene, camera);
+        }
+        resize();
+        renderer.setAnimationLoop(animate);
+        window.addEventListener("resize", resize);
+        window.addEventListener("beforeunload", () => {
+          window.removeEventListener("resize", resize);
+          renderer.setAnimationLoop(null);
+          geometry.dispose();
+          dropGeometry.dispose();
+          dropMaterials.forEach((dropMaterial) => dropMaterial.dispose());
+          material.dispose();
+          renderer.dispose();
+        });
+      }
+
+      initMotion();
+      window.requestIdleCallback?.(() => void initThree()) ??
+        window.setTimeout(() => void initThree(), 1);
+    </script>
+  </body>
 </html>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Besley:ital,wght@0,500;0,700;1,500&display=swap");
+  :root {
+    --ink: #080609;
+    --paper: #fff8ee;
+    --paper-2: #f3e4d0;
+    --paniko: #8b00c7;
+    --acid: #c8ff00;
+    --hot: #ff5b1a;
+    --muted: #b9aa98;
+    --line: rgba(255, 248, 238, 0.16);
+    --display: "Archivo Black", Impact, sans-serif;
+    --serif: "Besley", Georgia, serif;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    background: var(--ink);
+    color: var(--paper);
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  body {
+    margin: 0;
+    font-family: var(--serif);
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    background:
+      radial-gradient(
+        circle at 20% 0%,
+        rgba(139, 0, 199, 0.35),
+        transparent 30rem
+      ),
+      linear-gradient(180deg, #080609 0%, #120617 42%, #080609 100%);
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: -4;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        115deg,
+        transparent 0 44%,
+        rgba(200, 255, 0, 0.08) 45% 45.6%,
+        transparent 46% 100%
+      ),
+      linear-gradient(
+        65deg,
+        transparent 0 52%,
+        rgba(255, 91, 26, 0.1) 53% 53.8%,
+        transparent 54% 100%
+      );
+    transform: rotate(-4deg);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(
+        circle at 50% 40%,
+        rgba(139, 0, 199, 0.38),
+        transparent 24rem
+      ),
+      #080609;
+  }
+  .loader::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.2;
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 248, 238, 0.14) 25%,
+      transparent 25% 50%,
+      rgba(255, 248, 238, 0.14) 50% 75%,
+      transparent 75%
+    );
+    background-size: 28px 28px;
+  }
+  .loader-card {
+    position: relative;
+    width: min(430px, calc(100vw - 36px));
+    padding: 28px;
+    border: 1px solid rgba(255, 248, 238, 0.2);
+    border-radius: 34px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 248, 238, 0.12),
+      rgba(255, 248, 238, 0.035)
+    );
+    box-shadow: 0 36px 120px rgba(0, 0, 0, 0.46);
+    text-align: center;
+  }
+  .loader-card img {
+    width: 100%;
+    max-height: 170px;
+    object-fit: contain;
+    padding: 12px 20px;
+    border-radius: 28px;
+    background: white;
+  }
+  .loader-card p {
+    margin: 20px 0 12px;
+    font: 900 clamp(1.4rem, 5vw, 2.6rem)/0.9 var(--display);
+    letter-spacing: -0.07em;
+    text-transform: uppercase;
+  }
+  .loader-track {
+    height: 12px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255, 248, 238, 0.12);
+    border: 1px solid rgba(255, 248, 238, 0.16);
+  }
+  .loader-track span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, var(--acid), var(--hot), var(--paniko));
+    border-radius: inherit;
+  }
+  .loader-card small {
+    display: block;
+    margin-top: 12px;
+    color: var(--acid);
+    font-family: var(--display);
+    letter-spacing: 0.06em;
+  }
+  .scroll-rail {
+    position: fixed;
+    right: 18px;
+    top: 50%;
+    width: 5px;
+    height: 34vh;
+    transform: translateY(-50%);
+    z-index: 19;
+    border-radius: 999px;
+    background: rgba(255, 248, 238, 0.12);
+    overflow: hidden;
+  }
+  .scroll-rail span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top center;
+    background: linear-gradient(var(--acid), var(--hot), var(--paniko));
+    border-radius: inherit;
+  }
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.2;
+    mix-blend-mode: overlay;
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      white 1px,
+      transparent 0
+    );
+    background-size: 4px 4px;
+  }
+  #panic-orb {
+    position: fixed;
+    right: -4vw;
+    bottom: -5vw;
+    width: min(58vw, 760px);
+    height: min(58vw, 760px);
+    z-index: -1;
+    opacity: 0.72;
+    pointer-events: none;
+    filter: blur(0.1px) saturate(1.25);
+  }
+  .street-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .street-bg::before {
+    content: "";
+    position: absolute;
+    inset: -40% -20%;
+    opacity: 0.18;
+    background-image:
+      linear-gradient(rgba(255, 248, 238, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 248, 238, 0.1) 1px, transparent 1px);
+    background-size: 72px 72px;
+    transform: perspective(700px) rotateX(62deg) translateY(18%);
+    transform-origin: bottom;
+  }
+  .spray {
+    position: absolute;
+    width: 44vmax;
+    aspect-ratio: 1;
+    border-radius: 47% 53% 56% 44% / 42% 50% 50% 58%;
+    filter: blur(28px);
+    opacity: 0.28;
+    mix-blend-mode: screen;
+    will-change: transform;
+  }
+  .spray-a {
+    left: -18vmax;
+    top: 10vh;
+    background: radial-gradient(circle, var(--paniko), transparent 64%);
+  }
+  .spray-b {
+    right: -20vmax;
+    top: 42vh;
+    background: radial-gradient(circle, var(--hot), transparent 62%);
+  }
+  .street-line {
+    position: absolute;
+    left: 8vw;
+    top: 18vh;
+    width: 78vw;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(200, 255, 0, 0.85),
+      transparent
+    );
+    transform: rotate(-11deg);
+    box-shadow: 0 0 28px rgba(200, 255, 0, 0.55);
+  }
+  .panic-word {
+    position: absolute;
+    right: -7vw;
+    top: 24vh;
+    font: 900 clamp(7rem, 22vw, 22rem)/0.8 var(--display);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 248, 238, 0.055);
+    transform: rotate(90deg);
+    letter-spacing: -0.12em;
+  }
+  .section-shell {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .site-header {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1180px, calc(100% - 24px));
+    z-index: 20;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid rgba(255, 248, 238, 0.2);
+    border-radius: 28px;
+    background: linear-gradient(
+      135deg,
+      rgba(8, 6, 9, 0.86),
+      rgba(34, 8, 42, 0.7)
+    );
+    backdrop-filter: blur(20px);
+    box-shadow: 0 22px 80px rgba(0, 0, 0, 0.28);
+  }
+  .brand {
+    width: 148px;
+    height: 62px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      inset 0 0 0 1px rgba(139, 0, 199, 0.08),
+      0 16px 38px rgba(0, 0, 0, 0.22);
+  }
+  .brand img {
+    width: 92%;
+    height: 92%;
+    object-fit: contain;
+    padding: 2px 4px;
+    transform: scale(1.08);
+  }
+  .header-center {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 0 16px;
+    border: 1px solid rgba(255, 248, 238, 0.12);
+    border-radius: 21px;
+    background: rgba(255, 248, 238, 0.045);
+  }
+  .header-center > span {
+    color: var(--acid);
+    font: 900 0.72rem var(--display);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font: 900 0.72rem var(--display);
+    color: rgba(255, 248, 238, 0.82);
+    text-transform: uppercase;
+  }
+  nav a {
+    padding: 9px 12px;
+    border-radius: 999px;
+    transition:
+      background 0.18s ease,
+      color 0.18s ease;
+  }
+  nav a:hover {
+    color: var(--ink);
+    background: var(--acid);
+  }
+  .pill,
+  .button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 999px;
+    font-family: var(--display);
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+  .pill {
+    min-height: 54px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 9px 16px;
+    background: var(--acid);
+    color: var(--ink);
+    font-size: 0.68rem;
+    line-height: 1;
+    box-shadow: 0 14px 36px rgba(200, 255, 0, 0.18);
+  }
+  .pill span {
+    opacity: 0.72;
+  }
+  .pill b {
+    font-size: 0.9rem;
+    letter-spacing: -0.04em;
+  }
+  .button {
+    min-height: 54px;
+    padding: 0 24px;
+    border: 1px solid var(--line);
+    transition: transform 0.18s ease;
+  }
+  .button:hover {
+    transform: translateY(-3px) rotate(-1deg);
+  }
+  .button-primary {
+    background: var(--paniko);
+    color: white;
+    box-shadow: 0 18px 50px rgba(139, 0, 199, 0.45);
+  }
+  .button-ghost {
+    background: rgba(255, 248, 238, 0.06);
+  }
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.78fr);
+    align-items: center;
+    gap: clamp(24px, 5vw, 64px);
+    padding: 138px 0 80px;
+    position: relative;
+  }
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+  }
+  .eyebrow {
+    margin: 0 0 14px;
+    color: var(--acid);
+    font-family: var(--display);
+    font-size: clamp(0.74rem, 2vw, 0.92rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero-title,
+  h2 {
+    margin: 0;
+    font-family: var(--display);
+    line-height: 0.82;
+    text-transform: uppercase;
+    letter-spacing: -0.09em;
+  }
+  .hero-title {
+    font-size: clamp(4.6rem, 14.2vw, 12.4rem);
+    text-shadow:
+      7px 7px 0 var(--paniko),
+      12px 12px 0 rgba(200, 255, 0, 0.18);
+    max-width: 8ch;
+  }
+  .hero-subtitle {
+    max-width: 620px;
+    margin: 24px 0 0;
+    font-size: clamp(1.12rem, 2.5vw, 1.76rem);
+    color: var(--paper-2);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+  }
+  .hero-card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 38px;
+    padding: 14px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.02)
+    );
+    transform: rotate(3deg);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.42);
+  }
+  .hero-card img {
+    aspect-ratio: 4/5;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 28px;
+  }
+  .hero-card-label {
+    position: absolute;
+    left: -18px;
+    bottom: 34px;
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(8, 6, 9, 0.82);
+    backdrop-filter: blur(12px);
+  }
+  .hero-card-label span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .hero-card-label strong {
+    font-family: var(--display);
+    font-size: 1.45rem;
+  }
+  .scroll-cue {
+    position: absolute;
+    bottom: 28px;
+    left: 0;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+  }
+  .ticker {
+    border-block: 1px solid var(--line);
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 22% 50%,
+        rgba(139, 0, 199, 0.12),
+        transparent 34%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(8, 6, 9, 0.96),
+        rgba(20, 16, 23, 0.92),
+        rgba(8, 6, 9, 0.96)
+      );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 248, 238, 0.08),
+      inset 0 -1px 0 rgba(255, 248, 238, 0.08);
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    gap: 22px;
+    padding: 18px 0;
+    will-change: transform;
+  }
+  .ticker span {
+    font: 900 clamp(2rem, 7vw, 5.8rem)/0.9 var(--display);
+    color: rgba(232, 223, 210, 0.58);
+    -webkit-text-stroke: 1px rgba(255, 248, 238, 0.18);
+    text-shadow: 0 0 18px rgba(139, 0, 199, 0.14);
+    text-transform: uppercase;
+  }
+  .ticker span:nth-child(3n + 1) {
+    color: rgba(255, 248, 238, 0.64);
+    -webkit-text-stroke-color: rgba(255, 248, 238, 0.2);
+  }
+  .ticker span:nth-child(3n + 2) {
+    color: rgba(176, 150, 190, 0.54);
+    -webkit-text-stroke-color: rgba(176, 150, 190, 0.2);
+  }
+  .ticker span:nth-child(3n) {
+    color: rgba(185, 170, 152, 0.5);
+  }
+  .ritual {
+    --ritual-glow: 0;
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 0.86fr 1.14fr;
+    gap: clamp(22px, 5vw, 70px);
+    align-items: center;
+    padding-block: clamp(92px, 12vw, 150px);
+  }
+  .ritual::before {
+    content: "";
+    position: absolute;
+    inset: 8% -8%;
+    z-index: -1;
+    border-radius: 70px;
+    opacity: calc(0.22 + (var(--ritual-glow) * 0.36));
+    background:
+      radial-gradient(
+        circle at 30% 50%,
+        rgba(200, 255, 0, 0.18),
+        transparent 28rem
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(255, 91, 26, 0.22),
+        transparent 24rem
+      );
+    filter: blur(10px);
+  }
+  .ritual-copy {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+  .ritual-copy p:not(.eyebrow) {
+    max-width: 520px;
+    color: var(--paper-2);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+  }
+  .ritual-steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    perspective: 900px;
+    align-items: stretch;
+  }
+  .ritual-card {
+    min-height: 286px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    align-content: start;
+    gap: 14px;
+    padding: clamp(24px, 3vw, 34px);
+    border: 1px solid rgba(255, 248, 238, 0.2);
+    border-radius: 30px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 248, 238, 0.13),
+      rgba(139, 0, 199, 0.11) 54%,
+      rgba(255, 248, 238, 0.035)
+    );
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.24);
+    will-change: transform, opacity;
+  }
+  .ritual-card:nth-child(2n) {
+    transform: translateY(34px) rotate(1.2deg);
+  }
+  .ritual-card:nth-child(2n + 1) {
+    transform: rotate(-1.2deg);
+  }
+  .ritual-card span {
+    color: var(--acid);
+    font: 900 0.9rem var(--display);
+    align-self: start;
+  }
+  .ritual-card h3 {
+    margin: 0;
+    font: 900 clamp(1.65rem, 2.6vw, 2.45rem)/0.9 var(--display);
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+  }
+  .ritual-card p {
+    align-self: end;
+    margin: 0;
+    color: var(--paper-2);
+    font-size: clamp(0.98rem, 1.4vw, 1.1rem);
+    line-height: 1.48;
+  }
+  .section-heading,
+  .menu-intro {
+    padding: clamp(86px, 12vw, 150px) 0 40px;
+  }
+  h2 {
+    font-size: clamp(3.2rem, 10vw, 8rem);
+  }
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .product-card {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    gap: 15px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    background: rgba(255, 248, 238, 0.055);
+    transform: rotate(var(--rotate));
+  }
+  .product-card img {
+    aspect-ratio: 1/0.78;
+    object-fit: cover;
+    border-radius: 22px;
+    filter: saturate(1.08) contrast(1.04);
+  }
+  .product-card p {
+    margin: 0;
+    color: var(--acid);
+    font-size: 0.95rem;
+  }
+  .product-card h3,
+  .menu-column h3,
+  .location h3 {
+    margin: 0;
+    font: 900 clamp(1.8rem, 4vw, 3.5rem)/0.86 var(--display);
+    letter-spacing: -0.06em;
+  }
+  .product-card span {
+    color: var(--paper-2);
+  }
+  .product-card div:last-child {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .product-card strong,
+  .menu-price strong {
+    font-family: var(--display);
+    color: white;
+  }
+  .product-card a,
+  .menu-price a {
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 0.78rem;
+  }
+  .menu-intro {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: end;
+  }
+  .menu-intro aside {
+    padding: 24px;
+    border: 1px solid rgba(200, 255, 0, 0.35);
+    border-radius: 26px;
+    background: rgba(200, 255, 0, 0.08);
+    box-shadow: 0 20px 70px rgba(200, 255, 0, 0.08);
+  }
+  .menu-intro aside strong,
+  .menu-intro aside b {
+    display: block;
+    font-family: var(--display);
+    color: var(--acid);
+  }
+  .menu-board {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.25fr 0.95fr;
+    gap: 18px;
+    perspective: 1100px;
+  }
+  .menu-board::before {
+    content: "MENU";
+    position: absolute;
+    right: -2vw;
+    top: -44px;
+    z-index: -1;
+    font: 900 clamp(6rem, 16vw, 16rem)/0.8 var(--display);
+    letter-spacing: -0.12em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 248, 238, 0.045);
+  }
+  .menu-column {
+    padding: clamp(20px, 4vw, 38px);
+    border: 1px solid var(--line);
+    border-radius: 34px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 248, 238, 0.07),
+      rgba(255, 248, 238, 0.024)
+    );
+    box-shadow: 0 26px 90px rgba(0, 0, 0, 0.22);
+    will-change: transform, opacity;
+  }
+  .menu-column h3 {
+    margin-bottom: 22px;
+    color: var(--hot);
+  }
+  .menu-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    padding: 20px 14px;
+    border-top: 1px solid var(--line);
+    border-radius: 18px;
+    transform-style: preserve-3d;
+    transition:
+      background 0.18s ease,
+      border-color 0.18s ease;
+    will-change: transform, opacity;
+  }
+  .menu-item::before {
+    content: "";
+    position: absolute;
+    inset: 8px auto 8px 0;
+    width: 3px;
+    border-radius: 999px;
+    background: linear-gradient(var(--acid), var(--hot));
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+  .menu-item:hover {
+    background: rgba(255, 248, 238, 0.055);
+    border-color: rgba(200, 255, 0, 0.3);
+  }
+  .menu-item:hover::before {
+    opacity: 1;
+  }
+  .menu-item h4 {
+    margin: 0 0 7px;
+    font: 900 1.18rem var(--display);
+  }
+  .menu-item p,
+  .location p,
+  footer p {
+    margin: 0;
+    color: var(--paper-2);
+  }
+  .menu-price {
+    display: grid;
+    gap: 10px;
+    justify-items: end;
+    align-content: start;
+  }
+  .story {
+    width: min(1320px, calc(100% - 32px));
+    margin: clamp(100px, 14vw, 180px) auto 0;
+    display: grid;
+    grid-template-columns: 0.9fr 1fr;
+    gap: clamp(28px, 7vw, 96px);
+    align-items: center;
+  }
+  .story-image {
+    border-radius: 42px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    transform: rotate(-2deg);
+  }
+  .story-image img {
+    width: 100%;
+    min-height: 520px;
+    object-fit: cover;
+  }
+  .story-copy p:not(.eyebrow) {
+    font-size: clamp(1.04rem, 2vw, 1.35rem);
+    color: var(--paper-2);
+  }
+  .values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .values span {
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--acid);
+  }
+  .quote-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .quote-card {
+    margin: 0;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    background: rgba(255, 248, 238, 0.05);
+  }
+  blockquote {
+    margin: 0 0 20px;
+    color: var(--paper-2);
+  }
+  figcaption {
+    font-family: var(--display);
+    color: var(--acid);
+  }
+  .order-section {
+    width: min(1320px, calc(100% - 32px));
+    margin: clamp(100px, 14vw, 170px) auto 0;
+    min-height: 560px;
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    align-items: stretch;
+    border: 1px solid var(--line);
+    border-radius: 42px;
+    overflow: hidden;
+    background: var(--paniko);
+  }
+  .order-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .order-copy {
+    padding: clamp(34px, 7vw, 78px);
+    display: grid;
+    align-content: center;
+  }
+  .order-copy h2 {
+    color: white;
+  }
+  .order-copy p:not(.eyebrow) {
+    font-size: 1.25rem;
+  }
+  .location-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding-bottom: 30px;
+  }
+  .location article {
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 248, 238, 0.07),
+      rgba(255, 248, 238, 0.025)
+    );
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+  }
+  .map-stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.78fr 1.22fr;
+    gap: 18px;
+    align-items: stretch;
+    padding: 14px;
+    margin: 14px 0 96px;
+    border: 1px solid rgba(255, 248, 238, 0.18);
+    border-radius: 42px;
+    background: linear-gradient(
+      135deg,
+      rgba(139, 0, 199, 0.22),
+      rgba(8, 6, 9, 0.72) 44%,
+      rgba(200, 255, 0, 0.08)
+    );
+    overflow: hidden;
+    box-shadow: 0 36px 120px rgba(0, 0, 0, 0.34);
+  }
+  .map-stage::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    background: linear-gradient(
+      115deg,
+      transparent 0 48%,
+      rgba(200, 255, 0, 0.34) 49% 49.4%,
+      transparent 50% 100%
+    );
+    opacity: 0.7;
+  }
+  .map-copy {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-content: center;
+    gap: 16px;
+    padding: clamp(24px, 4vw, 44px);
+  }
+  .map-copy h3 {
+    margin: 0;
+    font: 900 clamp(2.2rem, 5vw, 4.5rem)/0.86 var(--display);
+    letter-spacing: -0.07em;
+    text-transform: uppercase;
+  }
+  .map-copy p:not(.eyebrow) {
+    margin: 0;
+    color: var(--paper-2);
+    font-size: 1.05rem;
+  }
+  .map-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .map-frame {
+    position: relative;
+    min-height: 460px;
+    border-radius: 32px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 248, 238, 0.22);
+    background: #16051d;
+    box-shadow:
+      inset 0 0 0 1px rgba(200, 255, 0, 0.12),
+      0 24px 70px rgba(0, 0, 0, 0.28);
+    will-change: transform, clip-path;
+  }
+  .map-frame iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 460px;
+    border: 0;
+    filter: grayscale(1) invert(0.9) contrast(1.05) saturate(0.55)
+      hue-rotate(235deg);
+    opacity: 0.86;
+  }
+  .map-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle at 48% 48%,
+        transparent 0 24%,
+        rgba(139, 0, 199, 0.25) 58%,
+        rgba(8, 6, 9, 0.72) 100%
+      ),
+      linear-gradient(135deg, rgba(200, 255, 0, 0.18), transparent 34%);
+    mix-blend-mode: screen;
+  }
+  .map-pin {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -100%) rotate(-3deg);
+    z-index: 2;
+    padding: 12px 16px;
+    border-radius: 999px 999px 999px 8px;
+    background: var(--acid);
+    color: var(--ink);
+    font: 900 0.9rem var(--display);
+    box-shadow: 0 18px 50px rgba(200, 255, 0, 0.28);
+    animation: pin-bounce 1.8s ease-in-out infinite;
+  }
+  @keyframes pin-bounce {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -8px;
+    }
+  }
+  footer {
+    display: grid;
+    justify-items: center;
+    gap: 16px;
+    padding: 54px 20px 64px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  footer img {
+    width: min(320px, 70vw);
+    padding: 14px 24px;
+    border-radius: 999px;
+    background: white;
+  }
+  footer div {
+    display: flex;
+    gap: 18px;
+    color: var(--acid);
+    font-family: var(--display);
+  }
+  footer small {
+    color: var(--muted);
+  }
+  .reveal-up,
+  .reveal-left,
+  .reveal-soft {
+    will-change: transform, opacity;
+  }
+  @media (max-width: 900px) {
+    .site-header {
+      grid-template-columns: auto auto;
+      border-radius: 24px;
+    }
+    .header-center {
+      display: none;
+    }
+    .brand {
+      width: 124px;
+      height: 54px;
+    }
+    .pill {
+      min-height: 48px;
+      padding: 8px 13px;
+    }
+    .pill b {
+      font-size: 0.78rem;
+    }
+    .scroll-rail {
+      display: none;
+    }
+    .hero,
+    .menu-intro,
+    .menu-board,
+    .story,
+    .order-section,
+    .location-grid,
+    .map-stage,
+    .ritual {
+      grid-template-columns: 1fr;
+    }
+    .hero {
+      padding-top: 124px;
+    }
+    .hero-title {
+      font-size: clamp(4rem, 22vw, 7rem);
+      max-width: 100%;
+    }
+    .featured-grid,
+    .quote-grid,
+    .ritual-steps {
+      grid-template-columns: 1fr;
+    }
+    .ritual {
+      min-height: auto;
+    }
+    .ritual-copy {
+      position: relative;
+      top: auto;
+    }
+    .ritual-card,
+    .ritual-card:nth-child(2n),
+    .ritual-card:nth-child(2n + 1) {
+      min-height: 240px;
+      transform: none;
+    }
+    .hero-card {
+      transform: rotate(0);
+    }
+    .menu-item {
+      grid-template-columns: 1fr;
+    }
+    .menu-price {
+      justify-items: start;
+      grid-auto-flow: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .scroll-cue {
+      display: none;
+    }
+    .story-image img {
+      min-height: 360px;
+    }
+    .map-stage {
+      border-radius: 30px;
+    }
+    .map-frame,
+    .map-frame iframe {
+      min-height: 360px;
+    }
+    .panic-word {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .loader {
+      display: none;
+    }
+    .reveal-up,
+    .reveal-left,
+    .reveal-soft,
+    .ticker-track,
+    .parallax-layer,
+    .map-frame,
+    .ritual-card {
+      transform: none !important;
+      opacity: 1 !important;
+      clip-path: none !important;
+    }
+    #panic-orb,
+    .scroll-rail {
+      display: none;
+    }
+    .map-pin {
+      animation: none;
+    }
+  }
+</style>
